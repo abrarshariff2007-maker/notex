@@ -267,6 +267,39 @@ const NoteXDB = (() => {
         return { success: true, user: existingUser };
       }
     },
+    async updateUser(email, updatedData) {
+      const emailLower = (email || "").toLowerCase();
+      let updatedUser = null;
+      try {
+        const payload = await api(`/api/users/${encodeURIComponent(emailLower)}`, {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(updatedData)
+        });
+        if (payload.user) updatedUser = payload.user;
+      } catch (error) {
+        // Fallback for GitHub Pages / offline mode
+      }
+
+      const idx = users.findIndex(u => u.email.toLowerCase() === emailLower);
+      if (idx >= 0) {
+        users[idx] = { ...users[idx], ...(updatedUser || updatedData) };
+        updatedUser = users[idx];
+      } else if (!updatedUser) {
+        updatedUser = { email: emailLower, ...updatedData };
+        users.push(updatedUser);
+      }
+
+      const active = getRaw(STORAGE_KEYS.ACTIVE_USER, null);
+      if (active && active.email.toLowerCase() === emailLower) {
+        const safeActive = { ...active, ...updatedUser };
+        delete safeActive.password;
+        setRaw(STORAGE_KEYS.ACTIVE_USER, safeActive);
+      }
+
+      refreshCaches();
+      return { success: true, user: updatedUser };
+    },
     getUserStats(email) {
       const myNotes = this.getUserNotes(email);
       const user = this.getUserByEmail(email);

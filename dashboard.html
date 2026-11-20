@@ -67,7 +67,12 @@
     <!-- Student Profile Banner -->
     <section class="dashboard-profile-card glass-panel">
       <div class="profile-main-info">
-        <img id="dashProfileAvatar" class="profile-avatar-large" src="" alt="Student Profile">
+        <div class="profile-avatar-wrapper" id="dashAvatarWrapper" title="Click to Change Profile Picture">
+          <img id="dashProfileAvatar" class="profile-avatar-large" src="" alt="Student Profile">
+          <div class="avatar-edit-badge" title="Change Profile Picture">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+          </div>
+        </div>
         <div class="profile-text-meta">
           <div class="profile-badges-row">
             <span class="edu-verified-badge">
@@ -93,6 +98,10 @@
       </div>
 
       <div class="profile-action-buttons">
+        <button id="openEditProfileBtn" class="btn btn-glass btn-sm" title="Edit Profile Details & Picture">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>
+          Edit Profile
+        </button>
         <button class="btn btn-primary trigger-upload-modal">
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
           Upload New Material
@@ -308,6 +317,98 @@
     </div>
   </div>
 
+  <!-- Edit Profile Modal -->
+  <div id="editProfileModal" class="modal-backdrop">
+    <div class="modal-card glass-panel" style="max-width: 520px;">
+      <div class="modal-header">
+        <div class="modal-title-group">
+          <div class="modal-icon-bubble bubble-cyan">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
+          </div>
+          <div>
+            <h2 class="modal-title">Edit Student Profile</h2>
+            <p class="modal-subtitle">Update your profile picture and academic details</p>
+          </div>
+        </div>
+        <button class="modal-close-btn" id="closeEditProfileBtn">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <form id="editProfileForm">
+          <!-- Profile Picture Section -->
+          <div class="avatar-editor-section">
+            <img id="editProfileAvatarPreview" class="edit-avatar-preview" src="" alt="Avatar Preview">
+            <div class="avatar-upload-actions">
+              <span style="font-size: 0.88rem; font-weight: 600; color: #fff;">Change Profile Picture</span>
+              <div style="display: flex; gap: 0.5rem; align-items: center; flex-wrap: wrap;">
+                <input type="file" id="avatarFileInput" accept="image/png, image/jpeg, image/jpg, image/webp" style="display: none;">
+                <button type="button" id="choosePhotoBtn" class="btn btn-glass btn-sm" style="font-size: 0.8rem;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                  Upload Photo
+                </button>
+                <button type="button" id="randomizeAvatarBtn" class="btn btn-glass btn-sm" style="font-size: 0.8rem;" title="Generate AI Avatar">
+                  🎲 AI Avatar
+                </button>
+              </div>
+              <span style="font-size: 0.75rem; color: var(--text-dim); margin-top: 0.25rem;">Or select a preset avatar:</span>
+              <div class="preset-avatars-row">
+                <img class="preset-avatar-chip" src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80" alt="Preset 1">
+                <img class="preset-avatar-chip" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80" alt="Preset 2">
+                <img class="preset-avatar-chip" src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80" alt="Preset 3">
+                <img class="preset-avatar-chip" src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80" alt="Preset 4">
+                <img class="preset-avatar-chip" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&auto=format&fit=crop&q=80" alt="Preset 5">
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="editFullName">Full Name</label>
+            <input type="text" id="editFullName" class="form-input" required placeholder="Your full name">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="editCollege">College / University</label>
+            <input type="text" id="editCollege" class="form-input" required placeholder="e.g. Presidency University">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="editBranch">Branch / Major</label>
+              <select id="editBranch" class="form-input" style="background: rgba(10, 14, 23, 0.9);">
+                <option value="Computer Science">Computer Science</option>
+                <option value="Information Technology">Information Tech</option>
+                <option value="Artificial Intelligence">AI & ML</option>
+                <option value="Mechanical">Mechanical</option>
+                <option value="Electronics">Electronics & Comm</option>
+                <option value="Civil">Civil</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="editSemester">Semester</label>
+              <select id="editSemester" class="form-input" style="background: rgba(10, 14, 23, 0.9);">
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4">Semester 4</option>
+                <option value="5">Semester 5</option>
+                <option value="6">Semester 6</option>
+                <option value="7">Semester 7</option>
+                <option value="8">Semester 8</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="modal-footer" style="padding: 1rem 0 0; border-top: none;">
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path><polyline points="17 21 17 13 7 13 7 21"></polyline><polyline points="7 3 7 8 15 8"></polyline></svg>
+              Save Profile Changes
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
   <!-- Toast Notification Container -->
   <div id="toastContainer" class="toast-container"></div>
 
@@ -420,7 +521,7 @@
 
         const tags = tagsInput ? tagsInput.split(',').map(t => t.trim().replace(/^#/, '')).filter(Boolean) : [branch, subject];
 
-        NoteXDB.addNote({
+        await NoteXDB.addNote({
           title,
           subject,
           courseCode,
@@ -441,6 +542,97 @@
         uploadForm.reset();
         window.showToast?.('🎉 New course material uploaded!', 'success');
         setTimeout(() => window.location.reload(), 600);
+      });
+    }
+
+    // Edit Profile Modal logic
+    const editProfileModal = document.getElementById('editProfileModal');
+    const openEditProfileBtn = document.getElementById('openEditProfileBtn');
+    const dashAvatarWrapper = document.getElementById('dashAvatarWrapper');
+    const editProfileForm = document.getElementById('editProfileForm');
+    const editAvatarPreview = document.getElementById('editProfileAvatarPreview');
+    const avatarFileInput = document.getElementById('avatarFileInput');
+    const choosePhotoBtn = document.getElementById('choosePhotoBtn');
+    const randomizeAvatarBtn = document.getElementById('randomizeAvatarBtn');
+    let currentEditAvatar = '';
+
+    function openEditProfile() {
+      const user = NoteXAuth.getCurrentUser();
+      if (!user) return;
+      document.getElementById('editFullName').value = user.fullName || '';
+      document.getElementById('editCollege').value = user.college || '';
+      document.getElementById('editBranch').value = user.branch || 'Computer Science';
+      document.getElementById('editSemester').value = user.semester || '1';
+      currentEditAvatar = user.avatar || `https://api.dicebear.com/7.x/bottts/svg?seed=${encodeURIComponent(user.fullName || 'Student')}`;
+      if (editAvatarPreview) editAvatarPreview.src = currentEditAvatar;
+      if (editProfileModal) editProfileModal.classList.add('active');
+    }
+
+    if (openEditProfileBtn) openEditProfileBtn.addEventListener('click', openEditProfile);
+    if (dashAvatarWrapper) dashAvatarWrapper.addEventListener('click', openEditProfile);
+    if (editProfileModal) {
+      editProfileModal.addEventListener('click', (e) => {
+        if (e.target === editProfileModal) editProfileModal.classList.remove('active');
+      });
+    }
+
+    if (choosePhotoBtn && avatarFileInput) {
+      choosePhotoBtn.addEventListener('click', () => avatarFileInput.click());
+      avatarFileInput.addEventListener('change', (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (file) {
+          const reader = new FileReader();
+          reader.onload = (evt) => {
+            currentEditAvatar = evt.target.result;
+            if (editAvatarPreview) editAvatarPreview.src = currentEditAvatar;
+          };
+          reader.readAsDataURL(file);
+        }
+      });
+    }
+
+    if (randomizeAvatarBtn) {
+      randomizeAvatarBtn.addEventListener('click', () => {
+        const seed = Math.random().toString(36).substring(2, 9);
+        currentEditAvatar = `https://api.dicebear.com/7.x/bottts/svg?seed=${seed}`;
+        if (editAvatarPreview) editAvatarPreview.src = currentEditAvatar;
+      });
+    }
+
+    document.querySelectorAll('.preset-avatar-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        currentEditAvatar = chip.src;
+        if (editAvatarPreview) editAvatarPreview.src = currentEditAvatar;
+        document.querySelectorAll('.preset-avatar-chip').forEach(c => c.classList.remove('active'));
+        chip.classList.add('active');
+      });
+    });
+
+    if (editProfileForm) {
+      editProfileForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const user = NoteXAuth.getCurrentUser();
+        if (!user) return;
+        const fullName = document.getElementById('editFullName').value.trim();
+        const college = document.getElementById('editCollege').value.trim();
+        const branch = document.getElementById('editBranch').value;
+        const semester = Number(document.getElementById('editSemester').value);
+
+        const res = await NoteXDB.updateUser(user.email, {
+          fullName,
+          college,
+          branch,
+          semester,
+          avatar: currentEditAvatar
+        });
+
+        if (res && res.success) {
+          editProfileModal.classList.remove('active');
+          window.showToast?.('🎉 Profile and picture updated successfully!', 'success');
+          setTimeout(() => window.location.reload(), 500);
+        } else {
+          window.showToast?.('Failed to update profile.', 'error');
+        }
       });
     }
 
