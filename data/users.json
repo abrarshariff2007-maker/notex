@@ -1,0 +1,38 @@
+[
+  {
+    "id": "user-001",
+    "fullName": "Alex Chen",
+    "email": "alex.chen@stanford.edu",
+    "password": "Password123!",
+    "college": "Stanford University",
+    "branch": "Computer Science",
+    "semester": 6,
+    "joinedDate": "2026-08-10",
+    "avatar": "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80",
+    "bookmarks": ["note-102", "note-103"]
+  },
+  {
+    "id": "user-002",
+    "fullName": "Priya Sharma",
+    "email": "priya.s@iitb.ac.in",
+    "password": "Password123!",
+    "college": "IIT Bombay",
+    "branch": "Computer Science",
+    "semester": 4,
+    "joinedDate": "2026-08-20",
+    "avatar": "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=150&auto=format&fit=crop&q=80",
+    "bookmarks": ["note-101", "note-104"]
+  },
+  {
+    "id": "user-003",
+    "fullName": "Marcus Vance",
+    "email": "m.vance@mit.edu",
+    "password": "Password123!",
+    "college": "Massachusetts Institute of Technology",
+    "branch": "Artificial Intelligence",
+    "semester": 7,
+    "joinedDate": "2026-09-01",
+    "avatar": "https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?w=150&auto=format&fit=crop&q=80",
+    "bookmarks": ["note-101", "note-105"]
+  }
+]

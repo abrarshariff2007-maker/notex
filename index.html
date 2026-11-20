@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NoteX | Verified Student Notes & Course Materials Exchange</title>
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/responsive.css">
+  
+  <!-- Favicon / App Icon -->
+  <link rel="icon" type="image/svg+xml" href="assets/logo.svg">
+</head>
+<body>
+  <!-- Ambient Moving Glass Gradients -->
+  <div class="ambient-background">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <!-- Navigation Bar (Frosted Glass Header) -->
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="index.html" class="logo-link">
+        <img src="assets/logo.svg" alt="NoteX Logo" class="logo-img">
+        <span class="logo-text">Note<span style="color: var(--neon-cyan);">X</span></span>
+        <span class="logo-badge">Edu Verified</span>
+      </a>
+
+      <button id="mobileNavToggle" class="nav-mobile-toggle" aria-label="Toggle navigation">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+      </button>
+
+      <ul id="navLinks" class="nav-links">
+        <li><a href="index.html" class="nav-link active">Explore Notes</a></li>
+        <li><a href="dashboard.html" class="nav-link">My Dashboard</a></li>
+        <li>
+          <button class="btn btn-primary btn-sm trigger-upload-modal">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+            Upload Notes
+          </button>
+        </li>
+      </ul>
+
+      <div id="navAuthActions" class="nav-actions">
+        <!-- Injected dynamically via auth state in app.js -->
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <main>
+    <section class="hero-section">
+      <div class="hero-pill">
+        <span class="hero-pill-dot"></span>
+        <span>Peer-to-Peer Academic Knowledge Sharing</span>
+      </div>
+      
+      <h1 class="hero-title">
+        The Open Exchange for <br>
+        <span class="hero-gradient-text">Verified College Notes</span>
+      </h1>
+      
+      <p class="hero-subtitle">
+        Upload your handwritten summaries, formula cheat-sheets, and previous exam question banks. 
+        Download peer-curated course materials verified across top engineering and science universities.
+      </p>
+
+      <div class="hero-actions" style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+        <a href="#exploreNotesSection" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          Search Course Materials
+        </a>
+        <button class="btn btn-glass trigger-upload-modal">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+          Share Your Notes
+        </button>
+      </div>
+
+      <!-- Live Global Counter Grid -->
+      <div class="hero-stats-row">
+        <div class="hero-stat-card glass-card">
+          <div class="hero-stat-num" id="statTotalNotes">6+</div>
+          <div class="hero-stat-label">Verified Notes</div>
+        </div>
+        <div class="hero-stat-card glass-card">
+          <div class="hero-stat-num" id="statTotalDownloads">8.3k</div>
+          <div class="hero-stat-label">Total Downloads</div>
+        </div>
+        <div class="hero-stat-card glass-card">
+          <div class="hero-stat-num" id="statTotalColleges">15+</div>
+          <div class="hero-stat-label">Universities Represented</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Search & Filter Hub -->
+    <section id="exploreNotesSection" class="search-hub">
+      <div class="search-box-glass">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+        </svg>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search by subject, course code (e.g. CS201), topic, or college...">
+      </div>
+
+      <div class="filter-controls-row">
+        <!-- Branch selection pills -->
+        <div class="branch-pills-wrap">
+          <button class="filter-pill branch-pill active" data-branch="All">All Branches</button>
+          <button class="filter-pill branch-pill" data-branch="Computer Science">Computer Science</button>
+          <button class="filter-pill branch-pill" data-branch="Information Technology">Information Tech</button>
+          <button class="filter-pill branch-pill" data-branch="Artificial Intelligence">AI & ML</button>
+          <button class="filter-pill branch-pill" data-branch="Mechanical">Mechanical</button>
+        </div>
+
+        <!-- Dropdowns for Semester & Sorting -->
+        <div class="filter-dropdowns">
+          <select id="semesterFilter" class="glass-select" aria-label="Filter by Semester">
+            <option value="All">All Semesters</option>
+            <option value="1">Semester 1</option>
+            <option value="2">Semester 2</option>
+            <option value="3">Semester 3</option>
+            <option value="4">Semester 4</option>
+            <option value="5">Semester 5</option>
+            <option value="6">Semester 6</option>
+            <option value="7">Semester 7</option>
+            <option value="8">Semester 8</option>
+          </select>
+
+          <select id="sortFilter" class="glass-select" aria-label="Sort Notes">
+            <option value="newest">Sort: Newest</option>
+            <option value="downloads">Sort: Most Downloaded</option>
+            <option value="likes">Sort: Highest Rated</option>
+          </select>
+        </div>
+      </div>
+    </section>
+
+    <!-- Notes Catalog Grid -->
+    <section class="notes-container">
+      <div class="section-header-row">
+        <h2 class="section-title">
+          <span>Available Study Materials</span>
+          <span id="notesCountBadge" class="section-count-badge">Loading...</span>
+        </h2>
+      </div>
+
+      <div id="notesGrid" class="notes-grid">
+        <!-- Dynamically rendered via app.js -->
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       MODALS
+       ========================================================================= -->
+
+  <!-- 1. Authentication Modal (College Email Verification) -->
+  <div id="authModal" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Student Portal</h3>
+        <button class="modal-close-btn" aria-label="Close dialog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="auth-tabs">
+          <button class="auth-tab-btn active" data-tab="login">Sign In</button>
+          <button class="auth-tab-btn" data-tab="register">Student Sign Up</button>
+        </div>
+
+        <!-- Login Form -->
+        <form id="loginForm">
+          <div class="form-group">
+            <label class="form-label" for="loginEmail">College Mail ID</label>
+            <input type="email" id="loginEmail" class="form-input" placeholder="e.g. yourname@college.edu" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="loginPassword">Password</label>
+            <input type="password" id="loginPassword" class="form-input" placeholder="••••••••" required>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Sign In to NoteX</button>
+
+          <!-- Quick Demo Logins Helper -->
+          <div class="demo-accounts-box">
+            <div class="demo-title">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="16" x2="12" y2="12"></line><line x1="12" y1="8" x2="12.01" y2="8"></line></svg>
+              Quick Demo Accounts (Click to test):
+            </div>
+            <span class="demo-click-chip" data-email="alex.chen@stanford.edu" data-pass="Password123!">Alex (Stanford)</span>
+            <span class="demo-click-chip" data-email="priya.s@iitb.ac.in" data-pass="Password123!">Priya (IIT Bombay)</span>
+            <span class="demo-click-chip" data-email="m.vance@mit.edu" data-pass="Password123!">Marcus (MIT)</span>
+          </div>
+        </form>
+
+        <!-- Register Form -->
+        <form id="registerForm" style="display: none;">
+          <div class="form-group">
+            <label class="form-label" for="regName">Full Name</label>
+            <input type="text" id="regName" class="form-input" placeholder="e.g. Jordan Smith" required>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="regEmail">College Email ID</label>
+            <input type="email" id="regEmail" class="form-input" placeholder="student@university.edu or .ac.in" required>
+            <div id="regEmailFeedback" class="email-feedback-pill"></div>
+            <input type="hidden" id="detectedCollegeDisplay">
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="regBranch">Branch / Major</label>
+              <select id="regBranch" class="form-input" style="background: rgba(10, 14, 23, 0.9);">
+                <option value="Computer Science">Computer Science</option>
+                <option value="Information Technology">Information Tech</option>
+                <option value="Artificial Intelligence">AI & Data Science</option>
+                <option value="Mechanical">Mechanical</option>
+                <option value="Electronics">Electrical / ECE</option>
+                <option value="Civil">Civil Engineering</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="regSemester">Semester</label>
+              <select id="regSemester" class="form-input" style="background: rgba(10, 14, 23, 0.9);">
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4">Semester 4</option>
+                <option value="5">Semester 5</option>
+                <option value="6">Semester 6</option>
+                <option value="7">Semester 7</option>
+                <option value="8">Semester 8</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="regPassword">Set Password</label>
+            <input type="password" id="regPassword" class="form-input" placeholder="At least 6 characters" required>
+          </div>
+
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 0.5rem;">Create Student Account</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Upload Notes Modal -->
+  <div id="uploadModal" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Share Course Material</h3>
+        <button class="modal-close-btn" aria-label="Close dialog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <form id="uploadNoteForm">
+          <!-- File Drop Zone -->
+          <div id="fileDropzone" class="dropzone-container">
+            <svg class="dropzone-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+              <polyline points="17 8 12 3 7 8"></polyline>
+              <line x1="12" y1="3" x2="12" y2="15"></line>
+            </svg>
+            <div class="dropzone-title">Click to browse or drag & drop notes file</div>
+            <div class="dropzone-sub">Supports PDF, DOCX, PPTX, or Handwritten scans (up to 25MB)</div>
+            <input type="file" id="noteFileInput" accept=".pdf,.doc,.docx,.ppt,.pptx,.txt" style="display: none;">
+          </div>
+
+          <!-- File Selected Preview -->
+          <div id="selectedFilePreview" class="selected-file-preview">
+            <div style="display: flex; align-items: center; gap: 0.5rem; overflow: hidden;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--neon-cyan)" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+              <span id="previewFileName" style="font-size: 0.85rem; font-weight: 600; color: #fff; text-overflow: ellipsis; overflow: hidden; white-space: nowrap;"></span>
+            </div>
+            <button type="button" id="removeSelectedFileBtn" style="background: none; border: none; color: #ff4d8d; cursor: pointer;">✕</button>
+          </div>
+
+          <div class="form-group" style="margin-top: 1rem;">
+            <label class="form-label" for="uploadTitle">Document Title *</label>
+            <input type="text" id="uploadTitle" class="form-input" placeholder="e.g. Complete Dynamic Programming Master Sheet" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="uploadSubject">Subject / Course Name *</label>
+              <input type="text" id="uploadSubject" class="form-input" placeholder="e.g. Algorithms & Complexity" required>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="uploadCourseCode">Course Code</label>
+              <input type="text" id="uploadCourseCode" class="form-input" placeholder="e.g. CS302">
+            </div>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+            <div class="form-group">
+              <label class="form-label" for="uploadBranch">Branch</label>
+              <select id="uploadBranch" class="form-input" style="background: rgba(10, 14, 23, 0.9);">
+                <option value="Computer Science">Computer Science</option>
+                <option value="Information Technology">Information Tech</option>
+                <option value="Artificial Intelligence">AI & ML</option>
+                <option value="Mechanical">Mechanical</option>
+                <option value="Electronics">Electronics & Comm</option>
+                <option value="Civil">Civil</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label class="form-label" for="uploadSemester">Semester</label>
+              <select id="uploadSemester" class="form-input" style="background: rgba(10, 14, 23, 0.9);">
+                <option value="1">Semester 1</option>
+                <option value="2">Semester 2</option>
+                <option value="3">Semester 3</option>
+                <option value="4" selected>Semester 4</option>
+                <option value="5">Semester 5</option>
+                <option value="6">Semester 6</option>
+                <option value="7">Semester 7</option>
+                <option value="8">Semester 8</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="uploadTags">Tags (Comma-separated)</label>
+            <input type="text" id="uploadTags" class="form-input" placeholder="e.g. DP, Recursion, Trees, Midterm">
+          </div>
+
+          <div class="form-group">
+            <label class="form-label" for="uploadDescription">Description & Notes Overview</label>
+            <textarea id="uploadDescription" class="form-input" rows="3" placeholder="Explain what topics are covered, exam tips, or textbook references..."></textarea>
+          </div>
+
+          <div class="modal-footer" style="padding: 1rem 0 0; border-top: none;">
+            <button type="submit" class="btn btn-primary" style="width: 100%;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              Publish to NoteX Community
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Preview & Download Modal -->
+  <div id="previewModal" class="modal-backdrop">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3 class="modal-title">Course Material Overview</h3>
+        <button class="modal-close-btn" aria-label="Close dialog">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+
+      <div class="modal-body" id="previewModalBody">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <div class="modal-footer">
+        <button class="btn btn-glass modal-close-btn-footer" onclick="document.getElementById('previewModal').classList.remove('active')">Close</button>
+        <button id="modalDownloadBtn" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+          Download Material Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification Container -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-container">
+      <div class="footer-brand">
+        <img src="assets/logo.svg" alt="NoteX" width="28" height="28">
+        <span style="font-weight: 800; font-size: 1.15rem; color: #fff;">Note<span style="color: var(--neon-cyan);">X</span></span>
+      </div>
+      <p class="footer-copy">Built for students, by students. Empowering academic collaboration with verified college credentials.</p>
+      <ul class="footer-links">
+        <li><a href="index.html" class="footer-link">Explore Notes</a></li>
+        <li><a href="dashboard.html" class="footer-link">Student Dashboard</a></li>
+        <li><a href="https://github.com" target="_blank" class="footer-link">Deploy on GitHub</a></li>
+      </ul>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/db.js"></script>
+  <script src="js/auth.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
